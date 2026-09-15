@@ -1,0 +1,4 @@
+# Source render for the globe assets — 14 MB, versioned but never needed to build or run.
+# Everything derived from it (icon.png, globe.webp, globe-sprite.webp) is committed, and
+# `pnpm globe` is a local task that needs ffmpeg anyway.
+assets-source

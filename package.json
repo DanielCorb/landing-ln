@@ -1,0 +1,50 @@
+{
+  "name": "landing-ln",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.1.1",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "node scripts/checkEnv.mjs",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "node scripts/deploy.mjs",
+    "lint": "eslint",
+    "fonts": "node scripts/buildFonts.mjs",
+    "globe": "node scripts/buildGlobeAssets.mjs",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{ts,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{ts,json}\""
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "firebase-admin": "^13.4.0",
+    "lucide-react": "^0.511.0",
+    "next": "16.1.6",
+    "nodemailer": "^9.0.3",
+    "react": "19.1.0",
+    "react-day-picker": "^10.0.1",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/nodemailer": "^8.0.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "postcss": "^8.5.3",
+    "prettier": "^3.9.6",
+    "subset-font": "^2.5.0",
+    "tailwindcss": "3.4.16",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "protobufjs",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

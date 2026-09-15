@@ -1,0 +1,444 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design System — CSS Custom Properties
+ * Light mode (:root) and Dark mode (.dark)
+ *
+ * Key rule from spec:
+ *   Off-white (#E8F1F2) → background in Light Mode, text in Dark Mode
+ *   Dark bg (#080A0B) → background in Dark Mode, text in Light Mode
+ */
+
+:root {
+  /* Backgrounds */
+  --color-background: #e8f1f2;
+  --color-surface: #ffffff;
+  --color-surface-alt: #dce9eb;
+
+  /* Borders */
+  --color-border: #c4d5d8;
+
+  /* Text */
+  --color-text-primary: #080a0b;
+  --color-text-secondary: #1a2e31;
+  --color-text-muted: #699aa0;
+}
+
+.dark {
+  /* Backgrounds */
+  --color-background: #080a0b;
+  --color-surface: #0f1415;
+  --color-surface-alt: #162022;
+
+  /* Borders */
+  --color-border: #1e3033;
+
+  /* Text — off-white as primary text in dark mode */
+  --color-text-primary: #e8f1f2;
+  --color-text-secondary: #b0c8cc;
+  --color-text-muted: #699aa0;
+}
+
+/* Base layer resets */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-text-muted);
+  }
+}
+
+/* Utility components */
+@layer components {
+  .btn-primary {
+    @apply bg-teal text-white font-medium px-5 py-2.5 rounded-btn
+           transition-all duration-200 ease-out
+           hover:bg-teal-dark hover:shadow-md
+           active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply bg-surface text-text-primary font-medium px-5 py-2.5 rounded-btn
+           border border-border
+           transition-all duration-200 ease-out
+           hover:bg-surface-alt hover:shadow-sm
+           active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-donate {
+    @apply bg-donate text-white font-bold px-6 py-3 rounded-btn
+           transition-all duration-200 ease-out
+           hover:brightness-110 hover:shadow-lg hover:shadow-donate/25
+           active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-field {
+    @apply w-full bg-surface text-text-primary px-4 py-3 rounded-btn
+           border border-border
+           transition-all duration-200
+           placeholder:text-text-muted
+           focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal;
+  }
+
+  .card {
+    @apply bg-surface rounded-card border border-border
+           transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-lg hover:border-teal hover:-translate-y-0.5;
+  }
+}
+
+/* Article body rendered from TipTap HTML — read-only prose styles */
+.article-body {
+  counter-reset: footnotes;
+}
+
+.article-body p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+
+.article-body h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+
+.article-body h2 {
+  font-size: 1.75rem;
+  line-height: 1.3;
+}
+
+.article-body h3 {
+  font-size: 1.375rem;
+  line-height: 1.4;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.article-body ul {
+  list-style-type: disc;
+}
+
+.article-body ol {
+  list-style-type: decimal;
+}
+
+.article-body ul li,
+.article-body ol li {
+  display: list-item;
+  margin-bottom: 0.375rem;
+  line-height: 1.7;
+}
+
+.article-body blockquote {
+  border-left: 4px solid #328992;
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.article-body a {
+  color: #328992;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+  /* Some links are raw URLs, which are a single unbreakable token on a narrow screen. */
+  overflow-wrap: anywhere;
+}
+
+.article-body a:hover {
+  color: #12454a;
+}
+
+.dark .article-body a {
+  color: #8fcad2;
+}
+
+.dark .article-body a:hover {
+  color: #e8f1f2;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* Footnote styling from TipTap */
+.article-body .tiptap-footnote {
+  color: #328992;
+  font-size: 0.8em;
+  vertical-align: super;
+  padding: 0 4px;
+  margin: 0 2px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  background: var(--color-surface-alt);
+  border-radius: 4px;
+  cursor: pointer;
+  counter-increment: footnotes;
+  user-select: none;
+}
+
+.article-body .tiptap-footnote::after {
+  content: '[' counter(footnotes) ']';
+}
+
+/* Jumping back from the notes list must clear the sticky header. */
+.article-body .tiptap-footnote {
+  scroll-margin-top: 6rem;
+}
+
+.dark .article-body .tiptap-footnote {
+  color: #8fcad2;
+}
+
+/* Strong/bold text */
+.article-body strong,
+.article-body b {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* Emphasis/italic text */
+.article-body em,
+.article-body i {
+  font-style: italic;
+}
+
+/* Inline code */
+.article-body code {
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.875em;
+  background: var(--color-surface-alt);
+  color: #328992;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+.dark .article-body code {
+  color: #8fcad2;
+}
+
+/* Code blocks */
+.article-body pre {
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.875em;
+  background: var(--color-surface-alt);
+  color: var(--color-text-primary);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+  border: 1px solid var(--color-border);
+}
+
+.article-body pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Highlighted/marked text */
+.article-body mark {
+  background: rgba(50, 137, 146, 0.15);
+  color: inherit;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+}
+
+/* Tables in article body */
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375em;
+}
+
+.article-body th,
+.article-body td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.article-body th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+}
+
+.article-body tr:nth-child(even) {
+  background: var(--color-surface);
+}
+
+/* Figure and figcaption */
+.article-body figure {
+  margin: 1.5rem 0;
+}
+
+.article-body figcaption {
+  font-size: 0.875em;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/*
+ * Turning globe, driven by a sprite sheet (see GlobeSpinner).
+ *
+ * The sheet is `frames × 100%` wide inside a square that clips it, so translating it by
+ * -100% walks through exactly every frame and `steps(frames)` lands on one per step.
+ * Wrapping back to frame 0 is the same size step as any other, so the loop has no seam.
+ *
+ * The frame count and the `steps()` timing come from the component as inline styles —
+ * they must match the generated sheet, so they live next to GLOBE_SPRITE_FRAMES.
+ */
+.globe-spinner {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.globe-spinner__sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Tailwind's preflight caps replaced elements at 100%; the sheet must exceed it. */
+  max-width: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation-name: globe-sprite-spin;
+  /*
+   * 2.6 s per full turn, i.e. about 17 frames a second.
+   *
+   * Not an arbitrary number. Roughly a fifth of the rotation is open Pacific with almost
+   * no landmass, so during those frames nothing visibly moves. At the original 4.4 s that
+   * stretch lasted about 0.8 s and read as the animation stalling and cutting back —
+   * "spins halfway and then stops". Shortening the cycle drops it to under half a second,
+   * which the eye reads as continuous motion, and it raises the frame rate at the same
+   * time. The fix is the tempo; the sheet itself is a complete, evenly sampled rotation.
+   */
+  animation-duration: 2.6s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes globe-sprite-spin {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globe-spinner__sheet {
+    animation: none;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Loading skeleton */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-alt);
+  border-radius: 0.5rem;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Selection color */
+::selection {
+  background-color: #328992;
+  color: #e8f1f2;
+}
+
+/**
+ * Teal surfaces flip the selection.
+ *
+ * The default highlight paints teal on teal, so a selection inside a teal block used to
+ * disappear. Those surfaces get the black highlight the header and footer already use.
+ */
+[class*='bg-teal']::selection,
+[class*='bg-teal'] *::selection,
+.btn-primary::selection,
+.btn-primary *::selection {
+  background-color: #000000;
+  color: #ffffff;
+}
